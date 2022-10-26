@@ -1,2 +1,2 @@
 # Documentação
-Documentação referente ao processo de desenvolvimento da fábrica de software.
+Documentação referente ao processo de desenvolvimento da Fábrica de Software.
