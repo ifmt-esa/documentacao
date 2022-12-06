@@ -347,7 +347,7 @@ Considerando os motivos que levam a criação de uma branch release, ela pode se
 Depois que uma branch release for encaminhada para a main (via merge), esta poderá ser
 excluı́da.
 
-### Brach Hotfix
+### Branch Hotfix
 
 É usada para a realização de correções de bugs crı́ticos encontrados no ambiente de produção, o que justifica sua criação a partir da branch main. Após as correções, o código deve voltar para a branch main e atualizar também a branch develop, visto que as próximas versões que estão em desenvolvimento devem conter as correções realizadas na hotfix.
 
@@ -395,3 +395,116 @@ sufixo da branch hotfix de origem.
 
 Depois que uma branch hotfix for encaminhada para a main (via merge), esta poderá ser
 excluı́da.
+
+## Padrões de Commits
+
+Esta seção contém boas práticas para realização de commits nos projetos. As recomendações aqui contidas são uma adaptação da especificação do Conventional Commits e manter este nı́vel de organização e coordenação no versionamento do código ajuda a:
+
+* Melhorar a legibilidade do histórico de versionamento do Git;
+* Aumentar a velocidade na hora de procurar por mudanças especı́ficas no código;
+* Entender, facilmente, quais mudanças estão sendo publicadas dentro de um pipeline;
+* Possibilitar a geração de um CHANGELOG ou de release notes de maneira totalmente automatizada;
+* Incentivar os desenvolvedores a realizarem commits de maneira pensada e especı́fica, sem realizar commits grandes e cheios de mudanças;
+* Possibilita a utilização de ferramentas de automação de commits.
+
+Este documento define um conjunto de regras para criar um histórico de commit explı́cito, o que facilita a criação de ferramentas automatizadas. Esta convenção segue o Padrão de Nomenclatura de Versões, descrevendo os recursos, correções e modificações que quebram a compatibilidade nas mensagens de commit.
+
+### Estrutura
+
+A mensagem do commit deve ser estruturada da seguinte forma:
+
+```markdow
+[tipo][escopo opcional]: [descrição]
+
+[corpo opcional]
+
+[rodapé opcional]
+```
+
+O commit contém os seguintes elementos estruturais, para comunicar a intenção ao utilizador da sua biblioteca.
+
+### Tipos
+
+Os tipos são a descrição inicial de o que o commit está realizando, sendo obrigatórios e devendo seguir um padrão bem definido.
+
+1. **feat:** um commit do tipo feat inclui um novo recurso na sua base de código (isso se correlaciona com MINOR do versionamento semântico).
+
+2. **fix:** um commit do tipo fix soluciona um problema na sua base de código (isso se correlaciona com PATCH do versionamento semântico).
+
+3. **docs:** um commit do tipo docs refere-se a inclusão ou alteração somente de arquivos de documentação.
+
+4. **chore:** um commit do tipo chore contém atualização de tarefas que não ocasionam alteração no código de produção mas mudanças de ferramentas, mudanças de configuração e bibliotecas que realmente não entram em produção. Basicamente engloba pequenas alterações que não são novas funcionalidades.
+
+5. **refactor:** um commit do tipo refactor abrange quaisquer mudanças que sejam executados no código, porém não alterem a funcionalidade final da tarefa impactada.
+
+6. **style:** um commit do tipo style inclui alterações referentes a formatações na apresentação do código que não afetam o significado do código, como por exemplo: espaço em branco, formatação, ponto e vírgula ausente etc.).
+
+7. **test:**  um commit do tipo test adiciona testes ausentes ou corrigindo testes existentes nos processos de testes automatizados (TDD);
+
+Um escopo pode ser adicionado ao tipo do commit, para fornecer informações contextuais adicionais e está contido entre parênteses, por exemplo feat(parser): adiciona capacidade de interpretar arrays.
+
+### Detalhando commit
+
+Nesta seção são detalhados os elementos que compõem o padrão de documentação dos commits.
+
+#### **Escopo**
+
+O escopo do commit é uma parte opcional, curta e de fácil compreensão. É nela que iremos dizer qual parte do código foi modificada, como indicar que fizemos alterações em uma determinada funcionalidade.
+
+#### **Descrição**
+
+A descrição, juntamente com o tipo, é uma das partes mais importantes do padrão: é aqui
+que deve ser descrito, de maneira clara, sucinta e simplificada, o que foi realizado no commit. É recomendado que essa parte tenha, no máximo, 70 caracteres, para que não se estenda muito.
+
+#### **Corpo**
+
+O corpo do commit é também opcional. Nele, pode-se realizar uma descrição mais detalhada
+do commit, indicar razões para a realização dele e consequências que ele pode vir a causar, além de alguma outra observação que seja pertinente.
+
+#### **Rodapé**
+
+O rodapé, assim como o corpo, é opcional e informativo. Ele pode ser usado como uma finalização do commit, informando o encerramento de uma issue ou o pertencimento/associação a uma task também.
+
+### Exemplos
+
+Mensagens de commit com descrição:
+
+```Markdown
+test: garante que DbLoadSurveys seja lançado se LoadSurveysRepository for lançado
+```
+
+```Markdown
+docs: ortografia correta de CHANGELOG
+```
+
+Mensagens de commit com tipo, escopo e descrição:
+
+```Markdown
+feat(login/rotas): alteração nas configurações de rota para o login
+```
+
+```Markdown
+feat(lang): adiciona tradução para português brasileiro
+```
+
+Mensagem de commit com tipo, descrição e corpo:
+
+```Markdown
+feat: garante que LoadSurveysController retorne 204 se não houver conteúdo
+
+Retorna o código 204 se o método de carregamento de pesquisa não retornar o conteúdo
+```
+
+Mensagem de commit com tipo, escopo, descrição, corpo e rodapé:
+
+```Markdown
+fix(core): remover apis wtf* obsoletos e extintos
+
+essas APIs foram obsoletas na v8, então elas devem permanecer até a v10, mas como estão extintas, estamos removendo-as mais cedo para que não ocupem o tamanho da carga útil
+
+PR close #33949
+```
+
+#### Granularidade
+
+A recomendação mais aceita para a granularidade é que cada commit seja atômico, considerando o escopo de uma única funcionalidade. Assim, cada commit só pode conter incremento ou correções de uma funcionalidade. Essa diretriz desconsidera o número de arquivos envolvidos, ou seja, não importa quantos arquivos foram afetados, desde que todos representem uma única funcionalidade ou correção.
