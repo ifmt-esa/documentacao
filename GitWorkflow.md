@@ -433,9 +433,9 @@ Os tipos são a descrição inicial de o que o commit está realizando, sendo ob
 
 3. **docs:** um commit do tipo docs refere-se a inclusão ou alteração somente de arquivos de documentação.
 
-4. **chore:** um commit do tipo chore contém atualização de tarefas que não ocasionam alteração no código de produção mas mudanças de ferramentas, mudanças de configuração e bibliotecas que realmente não entram em produção. Basicamente engloba pequenas alterações que não são novas funcionalidades.
+4. **chore:** um commit do tipo chore contém atualização de tarefas que não ocasiona alteração no código de produção mas mudanças de ferramentas, mudanças de configuração e bibliotecas que realmente não entram em produção. Basicamente engloba pequenas alterações que não são novas funcionalidades.
 
-5. **refactor:** um commit do tipo refactor abrange quaisquer mudanças que sejam executados no código, porém não alterem a funcionalidade final da tarefa impactada.
+5. **refactor:** um commit do tipo refactor abrange quaisquer mudanças que sejam executadas no código, porém não alterem a funcionalidade final da tarefa impactada.
 
 6. **style:** um commit do tipo style inclui alterações referentes a formatações na apresentação do código que não afetam o significado do código, como por exemplo: espaço em branco, formatação, ponto e vírgula ausente etc.).
 
@@ -547,3 +547,47 @@ qualquer funcionalidade do software for descontinuada(retirada).
 ### Desenvolvimento Inicial
 
 A versão de desenvolvimento inicial DEVE ser 0.1.0 e, então, incrementar a uma versão ‘menor’ em cada lançamento subsequente.
+
+## Configuração do ambiente
+
+Para interagir com o fluxo de versionamento de código é preciso configurar seu ambiente, esta seção contém as informações a respeito desses ajustes.
+
+### Instalação do Git
+
+Primeiramente é necessário fazer a instalação do Git no sistema operacional.
+
+Instalando no Linux:
+
+Se for utilizado uma distribuição baseada em Debian como o Ubuntu, use o apt-get:
+
+``` shell
+sudo apt-get install git-all
+```
+
+Se é utilizado a distribuição Fedora, pode ser usar o yum:
+
+``` shell
+sudo yum install git-all
+```
+
+Para mais informações acesse: <https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Instalando-o-Git>
+
+### Instalação do Git Flow
+
+Como o processo aqui proposto é baseado no fluxo do Git Flow então vai ser utilizado os comandos presente nesta ferramenta e para isso é preciso instalá-lo:
+
+Para distribuições baseada em Debian como o Ubuntu, use:
+
+``` shell
+sudo apt-get install git-flow
+```
+
+Para mais detalhes acesse: <https://skoch.github.io/Git-Workflow/>
+
+### Autenticação
+
+Na execução dos commits para o repositório remoto é fundamental estar autenticado. É possível fazer esse processo de duas maneiras: HTTPS e SSH. Ambos têm uma maneira diferente de efetuar a autenticação.
+
+É possivel efetuar esse processo acessando este tutorial: <https://blog.cod3r.com.br/autenticacao-no-github-pela-linha-de-comando/>
+
+Recomenda-se utilizar o método [SSH](https://blog.cod3r.com.br/autenticacao-no-github-pela-linha-de-comando/#:~:text=acessar%20a%20conta.-,Autentica%C3%A7%C3%A3o%20com%20SSH,-SSH%20%C3%A9%20uma).
