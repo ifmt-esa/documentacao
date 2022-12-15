@@ -505,6 +505,14 @@ essas APIs foram obsoletas na v8, então elas devem permanecer até a v10, mas c
 PR close #33949
 ```
 
+#### Assinatura de commits
+
+É recomendado fazer a assinatura dos commits para garantir a confiabilidade na publicação do código que você escreve. Adicionando a flag **-S** no comando, já é possível fazer a verificação do trabalho feito.
+
+```sh
+git commit -S
+```
+
 #### Granularidade
 
 A recomendação mais aceita para a granularidade é que cada commit seja atômico, considerando o escopo de uma única funcionalidade. Assim, cada commit só pode conter incremento ou correções de uma funcionalidade. Essa diretriz desconsidera o número de arquivos envolvidos, ou seja, não importa quantos arquivos foram afetados, desde que todos representem uma única funcionalidade ou correção.
