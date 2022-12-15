@@ -588,6 +588,451 @@ Para mais detalhes acesse: <https://skoch.github.io/Git-Workflow/>
 
 Na execução dos commits para o repositório remoto é fundamental estar autenticado. É possível fazer esse processo de duas maneiras: HTTPS e SSH. Ambos têm uma maneira diferente de efetuar a autenticação.
 
-É possivel efetuar esse processo acessando este tutorial: <https://blog.cod3r.com.br/autenticacao-no-github-pela-linha-de-comando/>
+É possível efetuar esse processo acessando este tutorial: <https://blog.cod3r.com.br/autenticacao-no-github-pela-linha-de-comando/>
 
 Recomenda-se utilizar o método [SSH](https://blog.cod3r.com.br/autenticacao-no-github-pela-linha-de-comando/#:~:text=acessar%20a%20conta.-,Autentica%C3%A7%C3%A3o%20com%20SSH,-SSH%20%C3%A9%20uma).
+
+## Exemplo prático
+
+O roteiro abaixo apresenta o modelo de versionamento e ramificação para fins de exemplificação prática, desde a criação do repositório até a realização dos commits.
+
+### Configuração do projeto
+
+1. Se o repositório não existir, crie configurando os seguintes dados:
+    * Selecione o template **"ifmt-esa/Template"** em modelo de repositório (**Repository template**);
+    * Deixe marcada a opção incluir todas as branches (**include all branches**).
+    * Preencha o nome do repositório (**Repository name**);
+    * Coloque uma pequena descrição sobre esse repositório (**Description**);
+    * Por último clique em criar repositório(**Create repository**)
+
+    ![Create a new repository](https://user-images.githubusercontent.com/44234388/207448039-5b5617ab-48af-435e-9acd-8371abfd186f.png)
+
+2. Copie as informações para clonar o repositório. É recomendado que use o modo **SSH**.
+
+    ![clone repositorio](https://user-images.githubusercontent.com/44234388/207714918-471d78b7-db10-4528-aa43-ed6e191ff7f7.png)
+
+3. Entre no terminal do computador e execute o comando para clonar inserindo a URL copiada:
+
+    ```shell
+    git clone URL
+    ```
+
+### Comandos iniciais do Git Flow
+
+Dentro do projeto utilize o comando abaixo para iniciar o Git Flow:
+
+  ```sh
+  git flow init
+  ```
+
+  Assim será solicitado, como visto abaixo, para quais branches você gostaria de usar. Você pode simplesmente apertar **enter** para todos.
+
+  ```shell
+  Which branch should be used for bringing forth production releases?
+    - develop
+    - main
+  Branch name for production releases: [main] 
+
+  Which branch should be used for integration of the "next release"?
+    - develop
+  Branch name for "next release" development: [develop] 
+
+  How to name your supporting branch prefixes?
+  Feature branches? [feature/] 
+  Bugfix branches? [bugfix/] 
+  Release branches? [release/] 
+  Hotfix branches? [hotfix/] 
+  Support branches? [support/] 
+  Version tag prefix? [] 
+  Hooks and filters directory? [/home/exemplo-fluxo-git/.git/hooks] 
+  ```
+
+Pronto, com isso já é possível utilizar os comandos Git e Git Flow para manusear as branches.
+
+Caso aconteça algo de errado e precise reiniciar as configurações iniciais do Git Flow então utilize o próximo comando:
+
+  ```sh
+  git flow init -f
+  ```
+
+### Exemplo prático na branch feature
+
+Para criar um novo recurso ou caracterı́stica a ser desenvolvida (feature), deverá gerar sua própria ramificação utilizando o comando que vem a seguir:
+
+  ```sh
+  git flow feature start nome-da-feature
+  ```
+
+Será mostrado um resumo das ações:
+
+  ```shell
+  Switched to a new branch 'feature/nome-da-feature'
+
+  Summary of actions:
+  - A new branch 'feature/nome-da-feature' was created, based on 'develop'
+  - You are now on branch 'feature/nome-da-feature'
+
+  Now, start committing on your feature. When done, use:
+
+      git flow feature finish nome-da-feature
+  ```
+
+Com essa branch criada é possível trabalhar nela sem afetar a ramificação original (develop).
+
+Depois de fazer as alterações no projeto, execute o comando a seguir para adicionar os arquivos alterados na pilha do commit:
+
+  ```sh
+  git add nome_do_arquivo
+  ```
+
+Caso queira adicionar todos os arquivos modificados então utilize:
+
+  ```sh
+  git add .
+  ```
+
+O commit com uma mensagem simples é feito aplicando o comando abaixo (siga os padrões de commits recomendados presente na seção `Padrões de Commits` ).
+
+Use o sinalizador **-S** para assinar os commits:
+
+  ```sh
+  git commit -S -m "tipo: descricao",
+  ```
+
+O próximo comando é usado para fazer commits mais detalhado:
+
+  ```sh
+  git commit -S,
+  ```
+
+Vai ser aberto um local no terminal para criação da descrição. Crie a mensagem e saia do local pressionando **Crtl-x**, depois a letra **s** para salvar o buffer modificado e por último pressione **enter**.
+
+```sh
+[tipo][escopo opcional]: [descrição]
+
+[corpo opcional]
+
+[rodapé opcional]
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# No ramo feature/nome-da-feature
+# Mudanças a serem submetidas:
+#       modified:   nome-dos-arquivos-modificados
+
+^G Ajuda        ^O Gravar        ^W Onde está?    ^K Recortar      ^T Executar      
+^C Local        M-U Desfazer     M-A Marcar       M-] Parênteses   M-Q Anterior     
+^B Voltar       ^X Sair          ^R Ler o arq     ^\ Substituir    ^U Colar         
+^J Justificar   ^/ Ir p/ linha   M-E Refazer      M-6 Copiar       ^Q Onde estava   
+M-W Próxima     ^F Encaminhar
+```
+
+Caso queira disponibilizar essa feature remotamente com objetivo que os outros usuários acessem, execute o comando:
+
+```sh
+git flow feature publish nome-da-feature
+```
+
+Assim será mostrado um resumo das ações:
+
+```shell
+Summary of actions:
+- The remote branch 'feature/nome-da-feature' was created or updated
+- The local branch 'feature/nome-da-feature' was configured to track the remote branch
+- You are now on branch 'feature/nome-da-feature'
+```
+
+Se um integrante da equipe alterar essa mesma branch, é possível fazer pull utilizando o comando abaixo:
+
+```sh
+git pull origin nome-da-branch
+```
+
+Se desejar baixar uma feature publicada por um outro usuário então use o comando a seguir:
+
+```sh
+git flow feature track nome-da-feature
+```
+
+Quando terminar o uso da branch então  utilize o comando abaixo para mesclar com a develop.
+
+```sh
+git flow feature finish nome-da-feature
+```
+
+Será mostrado algo pedindo para digitar uma mensagem de confirmação com o objetivo  de expliciar por que essa mesclagem é necessária. Fica opcional a escrita da mensagem.
+
+Pressione o **Crtl-x** para sair e confirmar.
+
+```sh
+Merge branch 'feature/nome-da-feature' into develop
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+
+
+
+^G Ajuda        ^O Gravar        ^W Onde está?    ^K Recortar      ^T Executar      
+^C Local        M-U Desfazer     M-A Marcar       M-] Parênteses   M-Q Anterior     
+^B Voltar       ^X Sair          ^R Ler o arq     ^\ Substituir    ^U Colar         
+^J Justificar   ^/ Ir p/ linha    M-E Refazer      M-6 Copiar      ^Q Onde estava   
+M-W Próxima     ^F Encaminhar
+```
+
+É mostrado um resumo das ações:
+
+```sh
+Summary of actions:
+- The feature branch 'feature/nome-da-feature' was merged into 'develop'
+- Feature branch 'feature/nome-da-feature' has been locally deleted; it has been remotely deleted from 'origin'
+- You are now on branch 'develop'
+```
+
+Não esqueça de executar o comando para enviar as alterações para o repositório remoto.
+
+```sh
+git push origin nome-da-branch
+```
+
+Ou utilize o comando para enviar todas as branches:
+
+```sh
+git push --all
+```
+
+### Exemplo prático na branch release
+
+A criação de uma release é feita aplicando o comando abaixo (siga os padrões descritos nas seções `Branch Release` e `Padrão de Nomenclatura de Versões`):
+
+```sh
+git flow release start versao-da-release
+```
+
+Siga os mesmos passos para execução dos commits e envio ao repositório remoto mostrado no tópico `Exemplo prático na branch feature`.
+
+Caso queira disponibilizar essa release remotamente para que possa ser usada por outros usuários, execute o comando:
+
+```sh
+git flow release publish versao-da-release
+```
+
+Se um integrante da equipe alterar essa mesma branch, é possível fazer pull utilizando o comando abaixo:
+
+```sh
+git pull origin nome-da-branch
+```
+
+Se desejar baixar uma release publicada por um outro usuário então use o comando a seguir:
+
+```sh
+git flow release track versao-da-release
+```
+
+Depois que todos os ajustes forem feitos então use o próximo comando para finalizar a branch.
+
+```sh
+git flow release finish versao-da-release
+```
+
+Logo depois é pedido para adicionar uma mensagem de mesclagem e essa ação é opcional.
+
+```sh
+Merge branch 'release/versao-da-release'
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+
+
+^G Ajuda        ^O Gravar        ^W Onde está?    ^K Recortar      ^T Executar      
+^C Local        M-U Desfazer     M-A Marcar       M-] Parênteses   M-Q Anterior     
+^B Voltar       ^X Sair          ^R Ler o arq     ^\ Substituir    ^U Colar         
+^J Justificar   ^/ Ir p/ linha   M-E Refazer      M-6 Copiar       ^Q Onde estava   
+M-W Próxima     ^F Encaminhar
+```
+
+Pressione o Crtl-x para sair e confirmar.
+
+É solicitado uma mensagem para criação da tag. Crie uma descrição que se relacione com a criação dessa nova versão.
+
+```sh
+Mensagem sobre essa tag
+#
+# Write a message for tag:
+#   versao-da-release
+# Lines starting with '#' will be ignored.
+
+G Ajuda         ^O Gravar        ^W Onde está?    ^K Recortar      ^T Executar      
+^C Local        M-U Desfazer     M-A Marcar       M-] Parênteses   M-Q Anterior     
+^B Voltar       ^X Sair          ^R Ler o arq     ^\ Substituir    ^U Colar         
+^J Justificar   ^/ Ir p/ linha   M-E Refazer      M-6 Copiar       ^Q Onde estava   
+M-W Próxima     ^F Encaminhar
+```
+
+Confirme pressionando **Crtl-x**, depois a letra **s** para salvar o buffer modificado e por último pressione **enter**.
+
+No console vai aparecer um resumo sobre os comentários adicionados.
+
+```sh
+Merge tag 'versao-da-release' into develop
+
+Mensagem sobre essa tag
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+
+
+^G Ajuda         ^O Gravar        ^W Onde está?    ^K Recortar      ^T Executar      
+^C Local         M-U Desfazer     M-A Marcar       M-] Parênteses   M-Q Anterior     
+^B Voltar        ^X Sair          ^R Ler o arq     ^\ Substituir    ^U Colar         
+^J Justificar    ^/ Ir p/ linha   M-E Refazer      M-6 Copiar       ^Q Onde estava   
+M-W Próxima      ^F Encaminhar
+```
+
+Pressione o Crtl-x para sair e confirmar.
+
+Em seguida vai ser mostrado um resumo das ações:
+
+```sh
+Summary of actions:
+- Release branch 'release/versao-da-release' has been merged into 'main'
+- The release was tagged 'versao-da-release'
+- Release tag 'versao-da-release' has been back-merged into 'develop'
+- Release branch 'release/versao-da-release' has been locally deleted
+- You are now on branch 'develop'
+```
+
+Por último, execute um push para mandar as modificações ao repositório remoto utilizando o comando para enviar todas as branches.
+
+```sh
+git push --all
+```
+
+Também é preciso enviar as tags criadas para o repositório usando o próximo comando.
+
+```sh
+git push origin --tags
+```
+
+### Exemplo prático na branch hotfix
+
+A mesma lógica é feita no manejo da branch hotfix.
+
+A criação da hotfix:
+
+```sh
+git flow hotfix start versao-da-hotfix
+```
+
+Caso queira disponibilizar esse hotfix remotamente:
+
+```sh
+git flow release publish versao-da-hotfix
+```
+
+Se um integrante da equipe alterar essa mesma branch, é possível fazer pull utilizando o comando abaixo:
+
+```sh
+git pull origin nome-da-branch
+```
+
+Se desejar baixar uma hotfix publicada:
+
+```sh
+git flow hotfix track versao-da-hotfix
+```
+
+Depois que a correção for feita, use o próximo comando para finalizar a branch.
+
+```sh
+git flow hotfix finish versao-da-hotfix
+```
+
+Logo após é pedido para adicionar uma mensagem de mesclagem e essa ação é opcional.
+
+```sh
+Merge branch 'release/versao-da-hotfix'
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+
+
+^G Ajuda        ^O Gravar        ^W Onde está?    ^K Recortar      ^T Executar      
+^C Local        M-U Desfazer     M-A Marcar       M-] Parênteses   M-Q Anterior     
+^B Voltar       ^X Sair          ^R Ler o arq     ^\ Substituir    ^U Colar         
+^J Justificar   ^/ Ir p/ linha   M-E Refazer      M-6 Copiar       ^Q Onde estava   
+M-W Próxima     ^F Encaminhar
+```
+
+Pressione o Crtl-x para sair e confirmar.
+
+É solicitado uma mensagem para criação da tag. Crie uma descrição que se relacione com a criação dessa nova versão.
+
+```sh
+Mensagem sobre essa tag
+#
+# Write a message for tag:
+#   versao-da-hotfix
+# Lines starting with '#' will be ignored.
+
+G Ajuda         ^O Gravar        ^W Onde está?    ^K Recortar      ^T Executar      
+^C Local        M-U Desfazer     M-A Marcar       M-] Parênteses   M-Q Anterior     
+^B Voltar       ^X Sair          ^R Ler o arq     ^\ Substituir    ^U Colar         
+^J Justificar   ^/ Ir p/ linha   M-E Refazer      M-6 Copiar       ^Q Onde estava   
+M-W Próxima     ^F Encaminhar
+```
+
+Confirme pressionando **Crtl-x**, depois a letra **s** para salvar o buffer modificado e por último pressione **enter**.
+
+No console vai aparecer um resumo sobre os comentários adicionados.
+
+```sh
+Merge tag 'versao-da-release' into develop
+
+Mensagem sobre essa tag
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+
+
+^G Ajuda         ^O Gravar        ^W Onde está?    ^K Recortar      ^T Executar      
+^C Local         M-U Desfazer     M-A Marcar       M-] Parênteses   M-Q Anterior     
+^B Voltar        ^X Sair          ^R Ler o arq     ^\ Substituir    ^U Colar         
+^J Justificar    ^/ Ir p/ linha   M-E Refazer      M-6 Copiar       ^Q Onde estava   
+M-W Próxima      ^F Encaminhar
+```
+
+Pressione o Crtl-x para sair e confirmar.
+
+Em seguida vai ser mostrado um resumo das ações:
+
+  ```sh
+  Summary of actions:
+  - Hotfix branch 'hotfix/versao-da-hotfix' has been merged into 'main'
+  - The hotfix was tagged 'versao-da-hotfix'
+  - Hotfix tag 'versao-da-hotfix' has been back-merged into 'develop'
+  - Hotfix branch 'hotfix/versao-da-hotfix' has been locally deleted
+  - You are now on branch 'develop'
+  ```
+
+Por último, execute um push para mandar as modificações ao repositório remoto utilizando o comando para enviar todas as branches.
+
+```sh
+git push --all
+```
+
+Também é preciso enviar a tag criada para o repositório remoto usando o próximo comando.
+
+```sh
+git push origin --tags
+```
