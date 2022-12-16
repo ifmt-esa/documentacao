@@ -248,7 +248,7 @@ gitGraph
   branch feature
 ```
 
-O primeiro passo do fluxo é criar uma brach com o nome main, caso o SCM ( Sistema de Controle de Código Fonte ) não tenha criado de forma automática. A estrutura inicial do projeto a ser desenvolvido será criada na branch main. Com o projeto criado na branch main, o segundo passo do fluxo é criar uma branch develop e executar um checkout tendo como origem a branch main.
+O primeiro passo do fluxo é criar uma branch com o nome main, caso o SCM ( Sistema de Controle de Código Fonte ) não tenha criado de forma automática. A estrutura inicial do projeto a ser desenvolvido será criada na branch main. Com o projeto criado na branch main, o segundo passo do fluxo é criar uma branch develop e executar um checkout tendo como origem a branch main.
 
 ### Branch feature
 
@@ -509,7 +509,7 @@ PR close #33949
 
 É recomendado fazer a assinatura dos commits para garantir a confiabilidade na publicação do código que você escreve. Adicionando a flag **-S** no comando, já é possível fazer a verificação do trabalho feito.
 
-```sh
+```code
 git commit -S
 ```
 
@@ -539,7 +539,7 @@ Abaixo apresenta-se o detalhamento de regras quanto aos diferentes nı́veis:
 
 1. Um número de versão normal DEVE ter o formato de **X.Y.Z**, onde X, Y, e Z são inteiros não negativos, e NÃO DEVE conter zeros à esquerda. X é a versão Maior, Y é a versão Menor, e Z é a versão de Correção. Cada elemento DEVE aumentar numericamente. Por exemplo: 1.9.0 - 1.10.0 - 1.11.0.
 
-2. Uma vez que um pacote versionado foi lançado(released) em Produção, o conteúdo desta versão NÃO DEVE ser modificado. Qualquer modificação DEVE ser lançado como uma nova versão.
+2. Uma vez que um pacote versionado foi lançado(released) em Produção, o conteúdo desta versão NÃO DEVE ser modificado. Qualquer modificação DEVE ser lançada como uma nova versão.
 
 3. No inı́cio do desenvolvimento, a versão Maior DEVE ser zero (0.y.z). Qualquer coisa pode mudar a qualquer momento. O software não deve ser considerado estável.
 
@@ -568,13 +568,13 @@ Instalando no Linux:
 
 Se for utilizado uma distribuição baseada em Debian como o Ubuntu, use o apt-get:
 
-``` shell
+```code
 sudo apt-get install git-all
 ```
 
 Se é utilizado a distribuição Fedora, pode ser usar o yum:
 
-``` shell
+```code
 sudo yum install git-all
 ```
 
@@ -582,11 +582,11 @@ Para mais informações acesse: <https://git-scm.com/book/pt-br/v2/Come%C3%A7and
 
 ### Instalação do Git Flow
 
-Como o processo aqui proposto é baseado no fluxo do Git Flow então vai ser utilizado os comandos presente nesta ferramenta e para isso é preciso instalá-lo:
+Como o processo aqui proposto é baseado no fluxo do Git Flow então vai ser utilizado os comandos presente no mesmo e para isso é preciso instalá-lo:
 
 Para distribuições baseada em Debian como o Ubuntu, use:
 
-``` shell
+```code
 sudo apt-get install git-flow
 ```
 
@@ -621,7 +621,7 @@ O roteiro abaixo apresenta o modelo de versionamento e ramificação para fins d
 
 3. Entre no terminal do computador e execute o comando para clonar inserindo a URL copiada:
 
-    ```shell
+    ```code
     git clone URL
     ```
 
@@ -629,13 +629,13 @@ O roteiro abaixo apresenta o modelo de versionamento e ramificação para fins d
 
 Dentro do projeto utilize o comando abaixo para iniciar o Git Flow:
 
-  ```sh
+  ```code
   git flow init
   ```
 
   Assim será solicitado, como visto abaixo, para quais branches você gostaria de usar. Você pode simplesmente apertar **enter** para todos.
 
-  ```shell
+  ```code
   Which branch should be used for bringing forth production releases?
     - develop
     - main
@@ -704,13 +704,13 @@ O commit com uma mensagem simples é feito aplicando o comando abaixo (siga os p
 Use o sinalizador **-S** para assinar os commits:
 
   ```sh
-  git commit -S -m "tipo: descricao",
+  git commit -S -m "tipo: descricao"
   ```
 
 O próximo comando é usado para fazer commits mais detalhado:
 
   ```sh
-  git commit -S,
+  git commit -S
   ```
 
 Vai ser aberto um local no terminal para criação da descrição. Crie a mensagem e saia do local pressionando **Crtl-x**, depois a letra **s** para salvar o buffer modificado e por último pressione **enter**.
@@ -769,7 +769,7 @@ Quando terminar o uso da branch então  utilize o comando abaixo para mesclar co
 git flow feature finish nome-da-feature
 ```
 
-Será mostrado algo pedindo para digitar uma mensagem de confirmação com o objetivo  de expliciar por que essa mesclagem é necessária. Fica opcional a escrita da mensagem.
+Será mostrado algo pedindo para digitar uma mensagem de confirmação com o objetivo  de explicar por que essa mesclagem é necessária. Fica opcional a escrita da mensagem.
 
 Pressione o **Crtl-x** para sair e confirmar.
 
@@ -863,7 +863,7 @@ Merge branch 'release/versao-da-release'
 M-W Próxima     ^F Encaminhar
 ```
 
-Pressione o Crtl-x para sair e confirmar.
+Pressione o **Crtl-x** para sair e confirmar.
 
 É solicitado uma mensagem para criação da tag. Crie uma descrição que se relacione com a criação dessa nova versão.
 
@@ -903,7 +903,7 @@ Mensagem sobre essa tag
 M-W Próxima      ^F Encaminhar
 ```
 
-Pressione o Crtl-x para sair e confirmar.
+Pressione o **Crtl-x** para sair e confirmar.
 
 Em seguida vai ser mostrado um resumo das ações:
 
@@ -916,15 +916,15 @@ Summary of actions:
 - You are now on branch 'develop'
 ```
 
-Por último, execute um push para mandar as modificações ao repositório remoto utilizando o comando para enviar todas as branches.
+Por último, execute um push para mandar as modificações ao repositório remoto utilizando o comando de envio de todas as branches.
 
-```sh
+```code
 git push --all
 ```
 
 Também é preciso enviar as tags criadas para o repositório usando o próximo comando.
 
-```sh
+```code
 git push origin --tags
 ```
 
@@ -934,38 +934,38 @@ A mesma lógica é feita no manejo da branch hotfix.
 
 A criação da hotfix:
 
-```sh
+```code
 git flow hotfix start versao-da-hotfix
 ```
 
 Caso queira disponibilizar esse hotfix remotamente:
 
-```sh
+```code
 git flow release publish versao-da-hotfix
 ```
 
 Se um integrante da equipe alterar essa mesma branch, é possível fazer pull utilizando o comando abaixo:
 
-```sh
+```code
 git pull origin nome-da-branch
 ```
 
 Se desejar baixar uma hotfix publicada:
 
-```sh
+```code
 git flow hotfix track versao-da-hotfix
 ```
 
 Depois que a correção for feita, use o próximo comando para finalizar a branch.
 
-```sh
+```code
 git flow hotfix finish versao-da-hotfix
 ```
 
 Logo após é pedido para adicionar uma mensagem de mesclagem e essa ação é opcional.
 
 ```sh
-Merge branch 'release/versao-da-hotfix'
+Merge branch 'hotfix/versao-da-hotfix'
 # Please enter a commit message to explain why this merge is necessary,
 # especially if it merges an updated upstream into a topic branch.
 #
@@ -1003,7 +1003,7 @@ Confirme pressionando **Crtl-x**, depois a letra **s** para salvar o buffer modi
 No console vai aparecer um resumo sobre os comentários adicionados.
 
 ```sh
-Merge tag 'versao-da-release' into develop
+Merge tag 'versao-da-hotfix' into develop
 
 Mensagem sobre essa tag
 # Please enter a commit message to explain why this merge is necessary,
@@ -1020,11 +1020,11 @@ Mensagem sobre essa tag
 M-W Próxima      ^F Encaminhar
 ```
 
-Pressione o Crtl-x para sair e confirmar.
+Pressione o **Crtl-x** para sair e confirmar.
 
 Em seguida vai ser mostrado um resumo das ações:
 
-  ```sh
+  ```code
   Summary of actions:
   - Hotfix branch 'hotfix/versao-da-hotfix' has been merged into 'main'
   - The hotfix was tagged 'versao-da-hotfix'
@@ -1033,14 +1033,14 @@ Em seguida vai ser mostrado um resumo das ações:
   - You are now on branch 'develop'
   ```
 
-Por último, execute um push para mandar as modificações ao repositório remoto utilizando o comando para enviar todas as branches.
+Por último, execute um push para mandar as modificações ao repositório remoto utilizando o comando de envio de todas as branches.
 
-```sh
+```code
 git push --all
 ```
 
 Também é preciso enviar a tag criada para o repositório remoto usando o próximo comando.
 
-```sh
+```code
 git push origin --tags
 ```
