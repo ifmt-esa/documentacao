@@ -625,6 +625,22 @@ O roteiro abaixo apresenta o modelo de versionamento e ramificação para fins d
     git clone URL
     ```
 
+### Template
+
+O template disponibilizado serve para oferecer arquivos básicos que serão utilizados na execução do projeto. Nele está presente:
+
+* docs: Uma pasta para organizar a documentação do projeto.
+
+* .gitignore: Esse arquivo está no modo `whitelist` onde é inserido os arquivos ou pastas que deseja enviar para o repositório.
+
+* Dockerfile: Utilizado para criar imagens. Em outras palavras, ele serve como a receita para construir um container, permitindo definir um ambiente personalizado e próprio para o projeto.
+
+* README.md: Dentro está presente uma descrição completa sobre o repositório.
+
+* shell.nix: Cria um ambiente virtual a partir das configurações internas. Para inicia-lo é preciso instalar o Nix-OS: <https://nixos.org/download.html>
+
+![Repositorio](https://user-images.githubusercontent.com/44234388/207997772-db11d769-f823-4507-9191-691d46acbd50.png)
+
 ### Comandos iniciais do Git Flow
 
 Dentro do projeto utilize o comando abaixo para iniciar o Git Flow:
