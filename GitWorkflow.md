@@ -103,13 +103,13 @@ gitGraph
   checkout develop
   commit
   merge feature/publicacao
-  branch release/1.0
+  branch release/v1.0
   commit
   commit
   checkout develop
-  merge release/1.0
+  merge release/v1.0
   checkout main
-  merge release/1.0 tag: "v1.0"
+  merge release/v1.0 tag: "v1.0"
 ```
 
 ### Branch feature/*
@@ -132,7 +132,7 @@ Permite ajustes e correções finas e prepara os metadados (número de versão, 
 * **Tempo de vida:** finito
 * **Criado de:** develop
 * **Pode ir para:** develop e main
-* **Padrão de nomenclatura:** release/número_próxima_versão
+* **Padrão de nomenclatura:** release/`v`número_próxima_versão
 
 ### Branch hotfix/*
 
@@ -143,7 +143,7 @@ Correção de erros identificados no código que está em produção (ambiente d
 * **Tempo de vida:** finito
 * **Criado de:** main
 * **Pode ir para:** main e develop
-* **Padrão de nomenclatura:** hotfix/sub-número_próxima_versão
+* **Padrão de nomenclatura:** hotfix/`v`sub-número_próxima_versão
 
 ## Descrição do Fluxo
 
@@ -185,38 +185,38 @@ gitGraph
   merge feature/funcionalidade2 tag: "Merge local"
   checkout develop
   merge feature/funcionalidade1
-  branch release/0.2.0 order: 3
+  branch release/v0.2.0 order: 3
   commit id: "release 0.2.0 (commit1)"
   commit id: "release 0.2.0 (commit2)"
   checkout develop
   branch feature/funcionalidade3 order: 8
   commit id: "Funcionalidade 3 (commit1)"
-  checkout release/0.2.0
+  checkout release/v0.2.0
   commit id: "release 0.2.0 (commit3)"
   checkout develop
-  merge release/0.2.0
+  merge release/v0.2.0
   checkout main
-  merge release/0.2.0 tag: "0.2.0"
+  merge release/v0.2.0 tag: "v0.2.0"
   checkout feature/funcionalidade3
   commit id: "Funcionalidade 3 (commit2)"
   checkout develop
   merge feature/funcionalidade3
   checkout main
-  branch hotfix/0.2.1 order: 2
+  branch hotfix/v0.2.1 order: 2
   commit id: "Erro 1 (commit1)"
   checkout develop
-  merge hotfix/0.2.1
+  merge hotfix/v0.2.1
   checkout main
-  merge hotfix/0.2.1 tag: "0.2.1"
+  merge hotfix/v0.2.1 tag: "v0.2.1"
   checkout develop
   branch feature/funcionalidade4 order: 9
   commit "Funcionalidade 4 (commit1)"
   commit "Funcionalidade 4 (commit2)"
   checkout develop
   merge feature/funcionalidade4
-  branch release/1.0.0 order: 4
+  branch release/v1.0.0 order: 4
   checkout main
-  merge release/1.0.0 tag: "1.0.0"
+  merge release/v1.0.0 tag: "v1.0.0"
 ```
 
 ### Branch main e develop
@@ -304,7 +304,7 @@ A criação de uma branch release se justifica por dois motivos:
 2. a branch release pode ser usada para a realização de configurações da nova versão (número de versão, informações de log, etc).
 
 Os nomes dessas branches começam com release/ e termina com o número da próxima versão
-do software, seguindo as regras do versionamento semântico, por exemplo: release/2.3.0. O diagrama abaixo ilustra esse fluxo.
+do software, seguindo as regras do versionamento semântico, por exemplo: release/v2.3.0. O diagrama abaixo ilustra esse fluxo.
 
 ```mermaid
 %%{ init: { 
@@ -354,7 +354,7 @@ excluı́da.
 A branch hotfix não pode ser usada para a inclusão de uma nova funcionalidade ou caracterı́stica ao software, mas sim corrigir algo já existente e que impede ou não atende a versão que está em produção. Isso justifica o fato que de o tempo de vida de uma branch hotfix deve ser curto, como horas ou no máximo um dia.
 
 Os nomes dessas branches começam com hotfix/ e terminam com o próximo sub-número de
-versão, por exemplo, se a versão atual em produção é 2.3.0, a branch deve ser criada com o nome hotfix/2.3.1, seguindo as regras do padrão de versionamento semântico. O diagrama abaixo ilustra esse fluxo.
+versão, por exemplo, se a versão atual em produção é v2.3.0, a branch deve ser criada com o nome hotfix/v2.3.1, seguindo as regras do padrão de versionamento semântico. O diagrama abaixo ilustra esse fluxo.
 
 ```mermaid
 %%{ init: { 
@@ -831,6 +831,8 @@ git push --all
 
 A criação de uma release é feita aplicando o comando abaixo (siga os padrões descritos nas seções `Branch Release` e `Padrão de Nomenclatura de Versões`):
 
+Não esqueça de adicionar a sigla `v` na frente do número de `versao-da-release` para que a tag seja gerada no padrão correto.
+
 ```sh
 git flow release start versao-da-release
 ```
@@ -947,6 +949,8 @@ git push origin --tags
 ### Exemplo prático na branch hotfix
 
 A mesma lógica é feita no manejo da branch hotfix.
+
+Não esqueça de adicionar a sigla `v` na frente do número de `versao-da-hotfix` para que a tag seja gerada no padrão correto.
 
 A criação da hotfix:
 
