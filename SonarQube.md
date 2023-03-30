@@ -54,7 +54,11 @@ As condições presentes no Quality Gates são utilizadas para verificar se um p
   * B = pelo menos 1 Vulnerabilidade Menor
   * C = pelo menos 1 Vulnerabilidade Maior
   * D = pelo menos 1 Vulnerabilidade Crítica
-  * E = pelo menos 1 Vulnerabilidade de Bloqueador
+  * E = pelo menos 1 Vulnerabilidade de BloqueadorDefault Fabrica de Software
+  DEFAULT
+  Sonar way
+  BUILT-IN
+  Teste
 
 Para mais detalhes acesse: <https://docs.sonarqube.org/latest/user-guide/metric-definitions/>
 
@@ -176,3 +180,21 @@ Essas outras condições estão descrita abaixo:
   O 'Security Review Rating' é calculado a partir da quantidade de vulnerabilidades identificadas pela análise de segurança do SonarQube e da gravidade de cada uma dessas vulnerabilidades. Quanto maior for a quantidade e gravidade das vulnerabilidades encontradas, menor será a pontuação do 'Security Review Rating', indicando que o projeto possui um maior risco de segurança.
 
 * **Lines (Linhas):** Analisar diversas métricas relacionadas a essas linhas de código, com cobertura de código, dívida técnica, qualidade de código, entre outras. No Quality Gate, é possível definir condições em relação a essas métricas, incluindo o número mínimo ou máximo de linhas de código que um projeto deve ter para ser considerado aceitável em termos de qualidade.
+
+### Condições Escolhida
+
+Para os projetos da Fábrica de Software foi escolhido as condições abaixo.
+
+O Quality Gate falha quando:
+
+* O **Coverage** for é menor do que **0.0%** (sem verificação).
+
+* O **Duplicated Lines (%)** for maior de **3%**.
+
+* A **Maintainability Rating** for menor do que **A**.
+
+* A **Reliability Rating** for menos que **A**.
+
+* A **Security Hotspots Reviewed** for menor do que **100%**.
+
+* O **Security Rating** for pior do que **B**.
