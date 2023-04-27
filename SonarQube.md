@@ -20,7 +20,7 @@ Ele garante que:
 
 As condições presentes no Quality Gates são utilizadas para verificar se um projeto de software atende aos requisitos aceitáveis em termos de qualidade de código. No SonarQube, é possível configurar as seguintes condições em um Quality Gate:
 
-* **Coverage (Cobertura):** Informam qual a porcentagem de seu código é coberta pelo conjunto de testes automatizados.
+* **Coverage (Cobertura):** Informa qual a porcentagem de seu código é coberta pelo conjunto de testes automatizados.
 
 * **Duplicated Lines (Linhas Duplicadas) (%):** Mede a porcentagem de código duplicado no projeto, o que pode indicar falta de modularização ou outras questões de design.
 
@@ -183,18 +183,18 @@ Essas outras condições estão descrita abaixo:
 
 ### Condições Escolhida
 
-Para os projetos da Fábrica de Software foi escolhido as condições abaixo.
+Para os projetos da Fábrica de Software foram definidas as condições abaixo:
 
 O Quality Gate falha quando:
 
-* O **Coverage** for é menor do que **0.0%** (sem verificação).
+* **Coverage** inferior a **0.0%** (sem verificação);
 
-* O **Duplicated Lines (%)** for maior de **3%**.
+* **Duplicated Lines (%)** superior a **3%**;
 
-* A **Maintainability Rating** for menor do que **A**.
+* **Maintainability Rating** inferior a **A**;
 
-* A **Reliability Rating** for menos que **A**.
+* A **Reliability Rating** inferior a **A**;
 
-* A **Security Hotspots Reviewed** for menor do que **100%**.
+* A **Security Hotspots Reviewed** inferior a **100%**;
 
-* O **Security Rating** for pior do que **B**.
+* O **Security Rating** pior do que **B**.
